@@ -4,34 +4,12 @@ import React from "react";
 // Styled Dependencies
 import { RiSearchLine } from "react-icons/ri";
 
-// Chakra Dependencies
-import { Flex, Icon, Input, Text } from "@chakra-ui/react";
+//Chakra Dependencies
+import { Flex, Input, Icon } from "@chakra-ui/react";
 
-const HeaderComponent: React.FC = () => {
+const SearchBoxComponent: React.FC = () => {
   return (
-    <Flex
-      as="header"
-      width={"100%"}
-      maxWidth={1480}
-      height="20"
-      marginX="auto"
-      marginTop="4"
-      padding="6"
-      alignItems="center"
-    >
-      <Text fontSize="3xl" fontWeight="bold" letterSpacing="tight" width="64">
-        prisma
-        <Text
-          as="span"
-          fontSize="5xl"
-          color="orange.500"
-          letterSpacing="tighter"
-        >
-          .
-        </Text>
-        dash
-      </Text>
-
+    <React.Fragment>
       <Flex
         as="label"
         flex="1"
@@ -55,8 +33,8 @@ const HeaderComponent: React.FC = () => {
         />
         <Icon as={RiSearchLine} fontSize="20" />
       </Flex>
-    </Flex>
+    </React.Fragment>
   );
 };
 
-export default HeaderComponent;
+export default SearchBoxComponent;
