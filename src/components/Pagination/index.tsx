@@ -2,15 +2,17 @@
 import React from "react";
 
 // Chakra Dependencies
-import { Button, HStack, Box } from "@chakra-ui/react";
+import { Button, Stack, Box, HStack } from "@chakra-ui/react";
 import ItemPaginationComponent from "./ItemPagination";
 
 const PaginationComponent: React.FC = () => {
   return (
-    <HStack
+    <Stack
+      direction={["column", "row"]}
       marginTop="8"
       spacing="6"
-      justifyContent="space-between"
+      flexDirection={["column", "row"]}
+      justifyContent={["center", "space-between"]}
       alignItems="center"
     >
       <Box>
@@ -24,7 +26,7 @@ const PaginationComponent: React.FC = () => {
         <ItemPaginationComponent numberPage={4} />
         <ItemPaginationComponent numberPage={5} />
       </HStack>
-    </HStack>
+    </Stack>
   );
 };
 

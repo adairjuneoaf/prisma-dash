@@ -1,6 +1,7 @@
 // Main Dependencies
 import React from "react";
 import Head from "next/head";
+import Link from "next/link";
 import { NextPage } from "next";
 
 // Styled Dependencies
@@ -22,6 +23,7 @@ import {
   Thead,
   Tr,
   HStack,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 
 // Components
@@ -30,6 +32,11 @@ import SidebarComponent from "../../components/Sidebar";
 import PaginationComponent from "../../components/Pagination";
 
 const PageUsers: NextPage = () => {
+  const isWideVersion = useBreakpointValue({
+    base: false,
+    lg: true,
+  });
+
   return (
     <React.Fragment>
       <Head>
@@ -47,7 +54,12 @@ const PageUsers: NextPage = () => {
         >
           <SidebarComponent />
 
-          <Box flex="1" borderRadius="8" backgroundColor="gray.800" padding="8">
+          <Box
+            flex="1"
+            borderRadius="8"
+            backgroundColor="gray.800"
+            padding={["4", "8"]}
+          >
             <Flex
               marginBottom="8"
               justifyContent="space-between"
@@ -56,39 +68,45 @@ const PageUsers: NextPage = () => {
               <Heading size="lg" fontWeight="bold">
                 Usuários
               </Heading>
-              <Button
-                as="a"
-                size="md"
-                fontSize="sm"
-                colorScheme="orange"
-                leftIcon={<Icon as={RiAddLine} fontSize="20" />}
-                cursor="pointer"
-              >
-                Criar novo
-              </Button>
+              <Link href={"/users/create"} passHref>
+                <Button
+                  as="a"
+                  size="md"
+                  fontSize="sm"
+                  colorScheme="orange"
+                  leftIcon={<Icon as={RiAddLine} fontSize="20" />}
+                  cursor="pointer"
+                >
+                  Criar novo
+                </Button>
+              </Link>
             </Flex>
 
             <Table colorScheme="whiteAlpha">
               <Thead>
                 <Tr>
-                  <Th paddingX="6" color="gray.300" width="8">
-                    <Checkbox
-                      isReadOnly={true}
-                      defaultChecked={true}
-                      colorScheme="orange"
-                      cursor="normal"
-                    />
-                  </Th>
+                  {isWideVersion && (
+                    <Th paddingX="6" color="gray.300" width="8">
+                      <Checkbox
+                        isReadOnly={true}
+                        defaultChecked={true}
+                        colorScheme="orange"
+                        cursor="normal"
+                      />
+                    </Th>
+                  )}
                   <Th color="gray.300">Usuário</Th>
-                  <Th color="gray.300">Data de cadastro</Th>
-                  <Th color="gray.300">Ações</Th>
+                  {isWideVersion && <Th color="gray.300">Data de cadastro</Th>}
+                  {isWideVersion && <Th color="gray.300">Ações</Th>}
                 </Tr>
               </Thead>
               <Tbody>
                 <Tr>
-                  <Td paddingX="6">
-                    <Checkbox colorScheme="orange" />
-                  </Td>
+                  {isWideVersion && (
+                    <Td paddingX="6">
+                      <Checkbox colorScheme="orange" />
+                    </Td>
+                  )}
                   <Td>
                     <Box>
                       <Text fontWeight="bold">Adair Juneo</Text>
@@ -97,37 +115,41 @@ const PageUsers: NextPage = () => {
                       </Text>
                     </Box>
                   </Td>
-                  <Td>01 de Março, 2022</Td>
-                  <Td>
-                    <HStack spacing="4" alignItems="flex-end">
-                      <Button
-                        as="a"
-                        size="sm"
-                        fontSize="sm"
-                        cursor="pointer"
-                        colorScheme="blue"
-                        title="Editar usuário"
-                      >
-                        <Icon as={RiPencilLine} fontSize="20" />
-                      </Button>
-                      <Button
-                        as="a"
-                        size="sm"
-                        fontSize="sm"
-                        cursor="pointer"
-                        colorScheme="red"
-                        title="Excluir usuário"
-                      >
-                        <Icon as={RiCloseLine} fontSize="20" />
-                      </Button>
-                    </HStack>
-                  </Td>
+                  {isWideVersion && <Td>01 de Março, 2022</Td>}
+                  {isWideVersion && (
+                    <Td>
+                      <HStack spacing="4" alignItems="flex-end">
+                        <Button
+                          as="a"
+                          size="sm"
+                          fontSize="sm"
+                          cursor="pointer"
+                          colorScheme="blue"
+                          title="Editar usuário"
+                        >
+                          <Icon as={RiPencilLine} fontSize="20" />
+                        </Button>
+                        <Button
+                          as="a"
+                          size="sm"
+                          fontSize="sm"
+                          cursor="pointer"
+                          colorScheme="red"
+                          title="Excluir usuário"
+                        >
+                          <Icon as={RiCloseLine} fontSize="20" />
+                        </Button>
+                      </HStack>
+                    </Td>
+                  )}
                 </Tr>
 
                 <Tr>
-                  <Td paddingX="6">
-                    <Checkbox colorScheme="orange" />
-                  </Td>
+                  {isWideVersion && (
+                    <Td paddingX="6">
+                      <Checkbox colorScheme="orange" />
+                    </Td>
+                  )}
                   <Td>
                     <Box>
                       <Text fontWeight="bold">Mariana Müller</Text>
@@ -136,37 +158,41 @@ const PageUsers: NextPage = () => {
                       </Text>
                     </Box>
                   </Td>
-                  <Td>01 de Março, 2022</Td>
-                  <Td width="64px">
-                    <HStack spacing="4">
-                      <Button
-                        as="a"
-                        size="sm"
-                        fontSize="sm"
-                        cursor="pointer"
-                        colorScheme="blue"
-                        title="Editar usuário"
-                      >
-                        <Icon as={RiPencilLine} fontSize="20" />
-                      </Button>
-                      <Button
-                        as="a"
-                        size="sm"
-                        fontSize="sm"
-                        cursor="pointer"
-                        colorScheme="red"
-                        title="Excluir usuário"
-                      >
-                        <Icon as={RiCloseLine} fontSize="20" />
-                      </Button>
-                    </HStack>
-                  </Td>
+                  {isWideVersion && <Td>01 de Março, 2022</Td>}
+                  {isWideVersion && (
+                    <Td width="64px">
+                      <HStack spacing="4">
+                        <Button
+                          as="a"
+                          size="sm"
+                          fontSize="sm"
+                          cursor="pointer"
+                          colorScheme="blue"
+                          title="Editar usuário"
+                        >
+                          <Icon as={RiPencilLine} fontSize="20" />
+                        </Button>
+                        <Button
+                          as="a"
+                          size="sm"
+                          fontSize="sm"
+                          cursor="pointer"
+                          colorScheme="red"
+                          title="Excluir usuário"
+                        >
+                          <Icon as={RiCloseLine} fontSize="20" />
+                        </Button>
+                      </HStack>
+                    </Td>
+                  )}
                 </Tr>
 
                 <Tr>
-                  <Td paddingX="6">
-                    <Checkbox colorScheme="orange" />
-                  </Td>
+                  {isWideVersion && (
+                    <Td paddingX="6">
+                      <Checkbox colorScheme="orange" />
+                    </Td>
+                  )}
                   <Td>
                     <Box>
                       <Text fontWeight="bold">Arnaldo César</Text>
@@ -175,31 +201,33 @@ const PageUsers: NextPage = () => {
                       </Text>
                     </Box>
                   </Td>
-                  <Td>01 de Março, 2022</Td>
-                  <Td width="64px">
-                    <HStack spacing="4">
-                      <Button
-                        as="a"
-                        size="sm"
-                        fontSize="sm"
-                        cursor="pointer"
-                        colorScheme="blue"
-                        title="Editar usuário"
-                      >
-                        <Icon as={RiPencilLine} fontSize="20" />
-                      </Button>
-                      <Button
-                        as="a"
-                        size="sm"
-                        fontSize="sm"
-                        cursor="pointer"
-                        colorScheme="red"
-                        title="Excluir usuário"
-                      >
-                        <Icon as={RiCloseLine} fontSize="20" />
-                      </Button>
-                    </HStack>
-                  </Td>
+                  {isWideVersion && <Td>01 de Março, 2022</Td>}
+                  {isWideVersion && (
+                    <Td width="64px">
+                      <HStack spacing="4">
+                        <Button
+                          as="a"
+                          size="sm"
+                          fontSize="sm"
+                          cursor="pointer"
+                          colorScheme="blue"
+                          title="Editar usuário"
+                        >
+                          <Icon as={RiPencilLine} fontSize="20" />
+                        </Button>
+                        <Button
+                          as="a"
+                          size="sm"
+                          fontSize="sm"
+                          cursor="pointer"
+                          colorScheme="red"
+                          title="Excluir usuário"
+                        >
+                          <Icon as={RiCloseLine} fontSize="20" />
+                        </Button>
+                      </HStack>
+                    </Td>
+                  )}
                 </Tr>
               </Tbody>
             </Table>

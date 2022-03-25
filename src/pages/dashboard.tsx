@@ -99,7 +99,7 @@ const Dashboard: NextPage = () => {
             alignItems="flex-start"
           >
             <Box
-              padding="8"
+              padding={["6", "8"]}
               backgroundColor="gray.800"
               borderRadius="8"
               paddingBottom="4"
@@ -116,7 +116,7 @@ const Dashboard: NextPage = () => {
             </Box>
 
             <Box
-              padding="8"
+              padding={["6", "8"]}
               backgroundColor="gray.800"
               borderRadius="8"
               paddingBottom="4"

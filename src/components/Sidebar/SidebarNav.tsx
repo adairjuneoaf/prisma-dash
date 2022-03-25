@@ -21,15 +21,21 @@ const SidebarNavComponent: React.FC = () => {
     <React.Fragment>
       <Stack spacing="8" align="flex-start">
         <NavSectionComponent title="GERAL">
-          <NavLinkComponent icon={RiDashboardLine}>Dashboard</NavLinkComponent>
-          <NavLinkComponent icon={RiContactsLine}>Usuários</NavLinkComponent>
+          <NavLinkComponent icon={RiDashboardLine} href="/dashboard">
+            Dashboard
+          </NavLinkComponent>
+          <NavLinkComponent icon={RiContactsLine} href="/users">
+            Usuários
+          </NavLinkComponent>
         </NavSectionComponent>
 
         <NavSectionComponent title="AUTOMAÇÃO">
-          <NavLinkComponent icon={RiInputMethodLine}>
+          <NavLinkComponent icon={RiInputMethodLine} href="/forms">
             Formulários
           </NavLinkComponent>
-          <NavLinkComponent icon={RiGitMergeLine}>Automação</NavLinkComponent>
+          <NavLinkComponent icon={RiGitMergeLine} href="/automation">
+            Automação
+          </NavLinkComponent>
         </NavSectionComponent>
       </Stack>
     </React.Fragment>
