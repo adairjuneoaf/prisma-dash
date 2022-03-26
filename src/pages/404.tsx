@@ -7,7 +7,6 @@ import { NextPage } from "next";
 import { Flex, Heading, Link as ChakraLink, Text } from "@chakra-ui/react";
 
 // Components
-import HeaderComponent from "../components/Header";
 import Link from "next/link";
 
 const Custom404: NextPage = () => {
