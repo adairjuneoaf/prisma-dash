@@ -9,13 +9,7 @@ const LogoComponent: React.FC = () => {
   return (
     <React.Fragment>
       <Link href={"/dashboard"} passHref>
-        <Text
-          fontSize={["2xl", "3xl"]}
-          fontWeight="bold"
-          letterSpacing="tight"
-          cursor="pointer"
-          width="64"
-        >
+        <Text fontSize={["2xl", "3xl"]} fontWeight="bold" letterSpacing="tight" cursor="pointer" width="64">
           prisma
           <Text as="span" color="orange.500">
             dash

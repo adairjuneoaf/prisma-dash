@@ -13,12 +13,7 @@ interface NavLinkComponentProps extends LinkProps {
   children: string;
 }
 
-const NavLinkComponent: React.FC<NavLinkComponentProps> = ({
-  icon,
-  href,
-  children,
-  ...props
-}) => {
+const NavLinkComponent: React.FC<NavLinkComponentProps> = ({ icon, href, children, ...props }) => {
   return (
     <React.Fragment>
       <ActiveLink href={href} passHref>

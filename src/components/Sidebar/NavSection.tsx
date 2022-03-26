@@ -10,10 +10,7 @@ interface NavSectionComponentProps {
   children: ReactNode;
 }
 
-const NavSectionComponent: React.FC<NavSectionComponentProps> = ({
-  title,
-  children,
-}) => {
+const NavSectionComponent: React.FC<NavSectionComponentProps> = ({ title, children }) => {
   return (
     <React.Fragment>
       <Box>

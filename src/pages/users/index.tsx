@@ -45,26 +45,11 @@ const PageUsers: NextPage = () => {
       <Box>
         <HeaderComponent />
 
-        <Flex
-          width="100%"
-          marginY="6"
-          maxWidth={1480}
-          marginX="auto"
-          paddingX="6"
-        >
+        <Flex width="100%" marginY="6" maxWidth={1480} marginX="auto" paddingX="6">
           <SidebarComponent />
 
-          <Box
-            flex="1"
-            borderRadius="8"
-            backgroundColor="gray.800"
-            padding={["4", "8"]}
-          >
-            <Flex
-              marginBottom="8"
-              justifyContent="space-between"
-              alignItems="center"
-            >
+          <Box flex="1" borderRadius="8" backgroundColor="gray.800" padding={["4", "8"]}>
+            <Flex marginBottom="8" justifyContent="space-between" alignItems="center">
               <Heading size="lg" fontWeight="bold">
                 Usuários
               </Heading>
@@ -87,12 +72,7 @@ const PageUsers: NextPage = () => {
                 <Tr>
                   {isWideVersion && (
                     <Th paddingX="6" color="gray.300" width="8">
-                      <Checkbox
-                        isReadOnly={true}
-                        defaultChecked={true}
-                        colorScheme="orange"
-                        cursor="normal"
-                      />
+                      <Checkbox isReadOnly={true} defaultChecked={true} colorScheme="orange" cursor="normal" />
                     </Th>
                   )}
                   <Th color="gray.300">Usuário</Th>

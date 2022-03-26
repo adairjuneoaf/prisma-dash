@@ -28,12 +28,7 @@ const SidebarComponent: React.FC = () => {
 
   if (isSidebarFloating) {
     return (
-      <Drawer
-        isFullHeight={true}
-        isOpen={isOpen}
-        placement="left"
-        onClose={onClose}
-      >
+      <Drawer isFullHeight={true} isOpen={isOpen} placement="left" onClose={onClose}>
         <DrawerOverlay background="gray.800" padding="4" width="256px">
           <DrawerCloseButton marginTop="6" />
           <DrawerHeader>Navegação</DrawerHeader>

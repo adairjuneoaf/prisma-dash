@@ -10,10 +10,7 @@ interface ItemPaginationComponentProps {
   isCurrentPage?: boolean;
 }
 
-const ItemPaginationComponent: React.FC<ItemPaginationComponentProps> = ({
-  numberPage,
-  isCurrentPage = false,
-}) => {
+const ItemPaginationComponent: React.FC<ItemPaginationComponentProps> = ({ numberPage, isCurrentPage = false }) => {
   if (isCurrentPage) {
     return (
       <React.Fragment>
@@ -33,13 +30,7 @@ const ItemPaginationComponent: React.FC<ItemPaginationComponentProps> = ({
 
   return (
     <React.Fragment>
-      <Button
-        size="sm"
-        fontSize="xs"
-        width="4"
-        backgroundColor="gray.700"
-        _hover={{ backgroundColor: "gray.500" }}
-      >
+      <Button size="sm" fontSize="xs" width="4" backgroundColor="gray.700" _hover={{ backgroundColor: "gray.500" }}>
         {numberPage}
       </Button>
     </React.Fragment>

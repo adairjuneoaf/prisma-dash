@@ -14,9 +14,7 @@ interface SidebarFloatingContextProps extends UseDisclosureReturn {}
 
 const SidebarFloatingContext = createContext({} as SidebarFloatingContextProps);
 
-const SidebarFloatingProvider = ({
-  children,
-}: SidebarFloatingContextProviderProps) => {
+const SidebarFloatingProvider = ({ children }: SidebarFloatingContextProviderProps) => {
   const disclosure = useDisclosure();
 
   const { route } = useRouter();
@@ -28,11 +26,7 @@ const SidebarFloatingProvider = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [route]);
 
-  return (
-    <SidebarFloatingContext.Provider value={disclosure}>
-      {children}
-    </SidebarFloatingContext.Provider>
-  );
+  return <SidebarFloatingContext.Provider value={disclosure}>{children}</SidebarFloatingContext.Provider>;
 };
 
 export { SidebarFloatingProvider, SidebarFloatingContext };

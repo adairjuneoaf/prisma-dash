@@ -70,9 +70,7 @@ const options: ApexOptions = {
   },
 };
 
-const series = [
-  { name: "subscribers", data: [140, 115, 95, 180, 68, 90, 100] },
-];
+const series = [{ name: "subscribers", data: [140, 115, 95, 180, 68, 90, 100] }];
 
 const Dashboard: NextPage = () => {
   return (
@@ -83,53 +81,22 @@ const Dashboard: NextPage = () => {
       <Flex flexDirection="column" h="100vh">
         <HeaderComponent />
 
-        <Flex
-          width="100%"
-          marginY="6"
-          maxWidth={1480}
-          marginX="auto"
-          paddingX="6"
-        >
+        <Flex width="100%" marginY="6" maxWidth={1480} marginX="auto" paddingX="6">
           <SidebarComponent />
 
-          <SimpleGrid
-            flex="1"
-            gap="4"
-            minChildWidth="320px"
-            alignItems="flex-start"
-          >
-            <Box
-              padding={["6", "8"]}
-              backgroundColor="gray.800"
-              borderRadius="8"
-              paddingBottom="4"
-            >
+          <SimpleGrid flex="1" gap="4" minChildWidth="320px" alignItems="flex-start">
+            <Box padding={["6", "8"]} backgroundColor="gray.800" borderRadius="8" paddingBottom="4">
               <Text fontSize="lg" marginBottom="4">
                 Inscritos da semana
               </Text>
-              <Chart
-                type="area"
-                options={options}
-                series={series}
-                height="192"
-              />
+              <Chart type="area" options={options} series={series} height="192" />
             </Box>
 
-            <Box
-              padding={["6", "8"]}
-              backgroundColor="gray.800"
-              borderRadius="8"
-              paddingBottom="4"
-            >
+            <Box padding={["6", "8"]} backgroundColor="gray.800" borderRadius="8" paddingBottom="4">
               <Text fontSize="lg" marginBottom="4">
                 Taxa de abertura
               </Text>
-              <Chart
-                type="area"
-                options={options}
-                series={series}
-                height="192"
-              />
+              <Chart type="area" options={options} series={series} height="192" />
             </Box>
           </SimpleGrid>
         </Flex>

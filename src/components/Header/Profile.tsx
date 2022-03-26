@@ -9,9 +9,7 @@ interface ProfileComponentProps {
   showProfileData: boolean;
 }
 
-const ProfileComponent: React.FC<ProfileComponentProps> = ({
-  showProfileData,
-}) => {
+const ProfileComponent: React.FC<ProfileComponentProps> = ({ showProfileData }) => {
   return (
     <React.Fragment>
       <Flex alignItems="center">
@@ -23,11 +21,7 @@ const ProfileComponent: React.FC<ProfileComponentProps> = ({
             </Text>
           </Box>
         )}
-        <Avatar
-          size="md"
-          name="Adair Juneo"
-          src="https://github.com/adairjuneoaf.png"
-        />
+        <Avatar size="md" name="Adair Juneo" src="https://github.com/adairjuneoaf.png" />
       </Flex>
     </React.Fragment>
   );

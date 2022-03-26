@@ -2,12 +2,7 @@
 import React from "react";
 
 // Styled Dependencies
-import {
-  RiDashboardLine,
-  RiContactsLine,
-  RiInputMethodLine,
-  RiGitMergeLine,
-} from "react-icons/ri";
+import { RiDashboardLine, RiContactsLine, RiInputMethodLine, RiGitMergeLine } from "react-icons/ri";
 
 // Chakra Dependencies
 import { Box, Stack } from "@chakra-ui/react";
