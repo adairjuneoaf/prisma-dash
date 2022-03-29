@@ -3,9 +3,12 @@ import React from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { NextPage } from "next";
+import { useQuery } from "react-query";
 
 // Styled Dependencies
 import { RiAddLine, RiCloseLine, RiPencilLine } from "react-icons/ri";
+import { format } from "date-fns";
+import ptBR from "date-fns/locale/pt-BR";
 
 // Chakra Dependencies
 import {
@@ -24,6 +27,7 @@ import {
   Tr,
   HStack,
   useBreakpointValue,
+  Spinner,
 } from "@chakra-ui/react";
 
 // Components
@@ -31,10 +35,40 @@ import HeaderComponent from "../../components/Header";
 import SidebarComponent from "../../components/Sidebar";
 import PaginationComponent from "../../components/Pagination";
 
+// Typings[TypeScript]
+type User = {
+  id: string;
+  name: string;
+  email: string;
+  created_at: string;
+};
+
+interface UserPropsFetch {
+  users: Array<User>;
+}
+
 const PageUsers: NextPage = () => {
   const isWideVersion = useBreakpointValue({
     base: false,
     lg: true,
+  });
+
+  const { data, isLoading, error } = useQuery("users", async () => {
+    const response = await fetch("http://localhost:3000/api/users");
+    const data = await response.json();
+
+    const users = data.users.map((user: User) => {
+      return {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        created_at: format(new Date(user.created_at), "dd/MM/yyyy", {
+          locale: ptBR,
+        }),
+      };
+    });
+
+    return users;
   });
 
   return (
@@ -67,152 +101,81 @@ const PageUsers: NextPage = () => {
               </Link>
             </Flex>
 
-            <Table colorScheme="whiteAlpha">
-              <Thead>
-                <Tr>
-                  {isWideVersion && (
-                    <Th paddingX="6" color="gray.300" width="8">
-                      <Checkbox isReadOnly={true} defaultChecked={true} colorScheme="orange" cursor="normal" />
-                    </Th>
-                  )}
-                  <Th color="gray.300">Usuário</Th>
-                  {isWideVersion && <Th color="gray.300">Data de cadastro</Th>}
-                  {isWideVersion && <Th color="gray.300">Ações</Th>}
-                </Tr>
-              </Thead>
-              <Tbody>
-                <Tr>
-                  {isWideVersion && (
-                    <Td paddingX="6">
-                      <Checkbox colorScheme="orange" />
-                    </Td>
-                  )}
-                  <Td>
-                    <Box>
-                      <Text fontWeight="bold">Adair Juneo</Text>
-                      <Text fontSize="sm" color="gray.300">
-                        adair_juneo@hotmail.com
-                      </Text>
-                    </Box>
-                  </Td>
-                  {isWideVersion && <Td>01 de Março, 2022</Td>}
-                  {isWideVersion && (
-                    <Td>
-                      <HStack spacing="4" alignItems="flex-end">
-                        <Button
-                          as="a"
-                          size="sm"
-                          fontSize="sm"
-                          cursor="pointer"
-                          colorScheme="blue"
-                          title="Editar usuário"
-                        >
-                          <Icon as={RiPencilLine} fontSize="20" />
-                        </Button>
-                        <Button
-                          as="a"
-                          size="sm"
-                          fontSize="sm"
-                          cursor="pointer"
-                          colorScheme="red"
-                          title="Excluir usuário"
-                        >
-                          <Icon as={RiCloseLine} fontSize="20" />
-                        </Button>
-                      </HStack>
-                    </Td>
-                  )}
-                </Tr>
-
-                <Tr>
-                  {isWideVersion && (
-                    <Td paddingX="6">
-                      <Checkbox colorScheme="orange" />
-                    </Td>
-                  )}
-                  <Td>
-                    <Box>
-                      <Text fontWeight="bold">Mariana Müller</Text>
-                      <Text fontSize="sm" color="gray.300">
-                        mariana.muller@hotmail.com
-                      </Text>
-                    </Box>
-                  </Td>
-                  {isWideVersion && <Td>01 de Março, 2022</Td>}
-                  {isWideVersion && (
-                    <Td width="64px">
-                      <HStack spacing="4">
-                        <Button
-                          as="a"
-                          size="sm"
-                          fontSize="sm"
-                          cursor="pointer"
-                          colorScheme="blue"
-                          title="Editar usuário"
-                        >
-                          <Icon as={RiPencilLine} fontSize="20" />
-                        </Button>
-                        <Button
-                          as="a"
-                          size="sm"
-                          fontSize="sm"
-                          cursor="pointer"
-                          colorScheme="red"
-                          title="Excluir usuário"
-                        >
-                          <Icon as={RiCloseLine} fontSize="20" />
-                        </Button>
-                      </HStack>
-                    </Td>
-                  )}
-                </Tr>
-
-                <Tr>
-                  {isWideVersion && (
-                    <Td paddingX="6">
-                      <Checkbox colorScheme="orange" />
-                    </Td>
-                  )}
-                  <Td>
-                    <Box>
-                      <Text fontWeight="bold">Arnaldo César</Text>
-                      <Text fontSize="sm" color="gray.300">
-                        arnaldo.cesar.filho@hotmail.com
-                      </Text>
-                    </Box>
-                  </Td>
-                  {isWideVersion && <Td>01 de Março, 2022</Td>}
-                  {isWideVersion && (
-                    <Td width="64px">
-                      <HStack spacing="4">
-                        <Button
-                          as="a"
-                          size="sm"
-                          fontSize="sm"
-                          cursor="pointer"
-                          colorScheme="blue"
-                          title="Editar usuário"
-                        >
-                          <Icon as={RiPencilLine} fontSize="20" />
-                        </Button>
-                        <Button
-                          as="a"
-                          size="sm"
-                          fontSize="sm"
-                          cursor="pointer"
-                          colorScheme="red"
-                          title="Excluir usuário"
-                        >
-                          <Icon as={RiCloseLine} fontSize="20" />
-                        </Button>
-                      </HStack>
-                    </Td>
-                  )}
-                </Tr>
-              </Tbody>
-            </Table>
-
-            <PaginationComponent />
+            {isLoading ? (
+              <Flex justifyContent={"center"}>
+                <Spinner color={"orange.500"} size={"lg"} />
+              </Flex>
+            ) : error ? (
+              <Flex justifyContent={"center"}>
+                <Text>Error</Text>
+              </Flex>
+            ) : (
+              <>
+                <Table colorScheme="whiteAlpha">
+                  <Thead>
+                    <Tr>
+                      {isWideVersion && (
+                        <Th paddingX="6" color="gray.300" width="8">
+                          <Checkbox isReadOnly={true} defaultChecked={true} colorScheme="orange" cursor="normal" />
+                        </Th>
+                      )}
+                      <Th color="gray.300">Usuário</Th>
+                      {isWideVersion && <Th color="gray.300">Data de cadastro</Th>}
+                      {isWideVersion && <Th color="gray.300">Ações</Th>}
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {data.map((user: User) => {
+                      return (
+                        <Tr key={user.id}>
+                          {isWideVersion && (
+                            <Td paddingX="6">
+                              <Checkbox colorScheme="orange" />
+                            </Td>
+                          )}
+                          <Td width={"60%"}>
+                            <Box>
+                              <Text fontWeight="bold">{user.name}</Text>
+                              <Text fontSize="sm" color="gray.300">
+                                {user.email}
+                              </Text>
+                            </Box>
+                          </Td>
+                          {isWideVersion && <Td width={"40%"}>{user.created_at}</Td>}
+                          {isWideVersion && (
+                            <Td width={"auto"}>
+                              <HStack spacing="4" alignItems="flex-end">
+                                <Button
+                                  as="a"
+                                  size="sm"
+                                  fontSize="sm"
+                                  cursor="pointer"
+                                  colorScheme="blue"
+                                  title="Editar usuário"
+                                >
+                                  <Icon as={RiPencilLine} fontSize="20" />
+                                </Button>
+                                <Button
+                                  as="a"
+                                  size="sm"
+                                  fontSize="sm"
+                                  cursor="pointer"
+                                  colorScheme="red"
+                                  title="Excluir usuário"
+                                >
+                                  <Icon as={RiCloseLine} fontSize="20" />
+                                </Button>
+                              </HStack>
+                            </Td>
+                          )}
+                        </Tr>
+                      );
+                    })}
+                  </Tbody>
+                </Table>
+                <PaginationComponent />
+              </>
+            )}
           </Box>
         </Flex>
       </Box>

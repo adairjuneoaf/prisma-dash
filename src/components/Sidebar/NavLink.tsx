@@ -1,6 +1,5 @@
 // Main Dependencies
 import React, { ElementType } from "react";
-import Link from "next/link";
 
 //Chakra Dependencies
 import { Icon, Link as ChakraLink, Text, LinkProps } from "@chakra-ui/react";
