@@ -4,6 +4,12 @@ import Head from "next/head";
 import Link from "next/link";
 import { NextPage } from "next";
 
+// Services Dependencies
+import { createNewUser } from "../../services/api";
+
+// Utils Dependencies
+import { useToasters } from "../../utils/useToasters";
+
 // Other Dependencies
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -18,7 +24,8 @@ import SidebarComponent from "../../components/Sidebar";
 import { InputComponent } from "../../components/Form/Input";
 
 // Chakra Dependencies
-import { Box, Button, Divider, Flex, Heading, HStack, Icon, SimpleGrid, VStack } from "@chakra-ui/react";
+import { Box, Button, Divider, Flex, Heading, HStack, Icon, SimpleGrid, VStack, useToast } from "@chakra-ui/react";
+import { useMutation, useQueryClient } from "react-query";
 
 // Typings[TypeScript]
 type TypeSubmitDataCreateNewUser = {
@@ -36,14 +43,41 @@ const createUserFormSchemaValidation = yup.object().shape({
 });
 
 const CreateUserPage: NextPage = () => {
-  const { register, handleSubmit, formState } = useForm({
+  const { toastSuccess, toastError } = useToasters("Controle de usuários");
+
+  const { register, handleSubmit, formState, reset } = useForm({
     resolver: yupResolver(createUserFormSchemaValidation),
+  });
+
+  const queryClient = useQueryClient();
+  const { mutateAsync } = useMutation(createNewUser, {
+    onSuccess: (_, data) => {
+      queryClient.setQueryData("users", {
+        data,
+      });
+    },
   });
 
   const { errors, isSubmitting } = formState;
 
-  const handleSubmitNewUser: SubmitHandler<TypeSubmitDataCreateNewUser> = (data) => {
-    console.log(data);
+  const handleSubmitNewUser: SubmitHandler<TypeSubmitDataCreateNewUser> = async (data) => {
+    await mutateAsync(
+      { ...data, created_at: new Date().toISOString() },
+      {
+        onSuccess: () => {
+          toastSuccess({
+            description: "Usuário criado com sucesso!",
+          });
+
+          reset();
+        },
+        onError: () => {
+          toastError({
+            description: "Ops, houve algum erro com a criação do usuário.",
+          });
+        },
+      }
+    );
   };
 
   return (

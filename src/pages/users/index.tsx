@@ -1,14 +1,15 @@
 // Main Dependencies
-import React from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { NextPage } from "next";
 import { useQuery } from "react-query";
 
+// Services Dependencies
+import { getAllUsers } from "../../services/api";
+
 // Styled Dependencies
 import { RiAddLine, RiCloseLine, RiPencilLine } from "react-icons/ri";
-import { format } from "date-fns";
-import ptBR from "date-fns/locale/pt-BR";
 
 // Chakra Dependencies
 import {
@@ -35,41 +36,15 @@ import HeaderComponent from "../../components/Header";
 import SidebarComponent from "../../components/Sidebar";
 import PaginationComponent from "../../components/Pagination";
 
-// Typings[TypeScript]
-type User = {
-  id: string;
-  name: string;
-  email: string;
-  created_at: string;
-};
-
-interface UserPropsFetch {
-  users: Array<User>;
-}
-
 const PageUsers: NextPage = () => {
+  const [page, setPage] = useState<number>(1);
+
   const isWideVersion = useBreakpointValue({
     base: false,
     lg: true,
   });
 
-  const { data, isLoading, error } = useQuery("users", async () => {
-    const response = await fetch("http://localhost:3000/api/users");
-    const data = await response.json();
-
-    const users = data.users.map((user: User) => {
-      return {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        created_at: format(new Date(user.created_at), "dd/MM/yyyy", {
-          locale: ptBR,
-        }),
-      };
-    });
-
-    return users;
-  });
+  const { data, isLoading, isFetching, error } = useQuery(["users", page], () => getAllUsers(page));
 
   return (
     <React.Fragment>
@@ -86,6 +61,7 @@ const PageUsers: NextPage = () => {
             <Flex marginBottom="8" justifyContent="space-between" alignItems="center">
               <Heading size="lg" fontWeight="bold">
                 Usuários
+                {isFetching && !isLoading && <Spinner size={"sm"} color={"orange.500"} marginLeft={"4"} />}
               </Heading>
               <Link href={"/users/create"} passHref>
                 <Button
@@ -125,7 +101,7 @@ const PageUsers: NextPage = () => {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {data.map((user: User) => {
+                    {data.users.map((user) => {
                       return (
                         <Tr key={user.id}>
                           {isWideVersion && (
@@ -173,7 +149,11 @@ const PageUsers: NextPage = () => {
                     })}
                   </Tbody>
                 </Table>
-                <PaginationComponent />
+                <PaginationComponent
+                  totalCountOfRegisters={data.totalCount}
+                  onPageChange={setPage}
+                  currentPage={page}
+                />
               </>
             )}
           </Box>

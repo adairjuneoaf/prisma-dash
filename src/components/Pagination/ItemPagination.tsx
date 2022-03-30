@@ -7,10 +7,15 @@ import { Button } from "@chakra-ui/react";
 // Typing[TypeScript]
 interface ItemPaginationComponentProps {
   numberPage: number;
+  onPageChange: (page: number) => void;
   isCurrentPage?: boolean;
 }
 
-const ItemPaginationComponent: React.FC<ItemPaginationComponentProps> = ({ numberPage, isCurrentPage = false }) => {
+const ItemPaginationComponent: React.FC<ItemPaginationComponentProps> = ({
+  numberPage,
+  onPageChange,
+  isCurrentPage = false,
+}) => {
   if (isCurrentPage) {
     return (
       <React.Fragment>
@@ -30,7 +35,14 @@ const ItemPaginationComponent: React.FC<ItemPaginationComponentProps> = ({ numbe
 
   return (
     <React.Fragment>
-      <Button size="sm" fontSize="xs" width="4" backgroundColor="gray.700" _hover={{ backgroundColor: "gray.500" }}>
+      <Button
+        size="sm"
+        fontSize="xs"
+        width="4"
+        backgroundColor="gray.700"
+        _hover={{ backgroundColor: "gray.500" }}
+        onClick={() => onPageChange(numberPage)}
+      >
         {numberPage}
       </Button>
     </React.Fragment>
